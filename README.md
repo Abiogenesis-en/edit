@@ -1,1 +1,1 @@
-https://ebookipedia.github.io/wikipedia
+https://ebookipedia.github.io/adapters/wikipedia
