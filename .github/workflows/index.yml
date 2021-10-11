@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/setup-java@v2
         with:
-          distribution: 'temerin'
+          distribution: 'temurin'
           java-version: '8'
       - run: wget https://ebookipedia.github.io/java/build.jar
       - run: java -cp build.jar mirror.Wikipedia $GITHUB_REPOSITORY
