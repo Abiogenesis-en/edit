@@ -19,10 +19,8 @@ jobs:
           echo $starting
           echo ${{ env.starting }}
           if [ ! -f src/source.epub ]; then
-            echo "entra por el if"
-            #sudo apt-get install mediawiki2latex
-            #mediawiki2latex --epub -u ${{ env.url }}
-            echo "Hello, World" > src/source.epub
+            sudo apt-get install mediawiki2latex
+            mediawiki2latex --epub --url="$(< wikipedia.url)" --output="src/source.epub"
             git config --global user.name 'Santiago Ruiz'
             git config --global user.email 'hiebra@hotmail.com'
             git add src/source.epub
