@@ -21,7 +21,7 @@ jobs:
           if [ ! -f initial.epub ]; then
             #sudo apt-get install mediawiki2latex
             #mediawiki2latex --epub -u ${{ env.url }}
-            echo "Hello, World" > src/initial.epub
+            echo "Hello, World" > src/source.epub
             git config --global user.name 'Santiago Ruiz'
             git config --global user.email 'hiebra@hotmail.com'
             git add src/source.epub
