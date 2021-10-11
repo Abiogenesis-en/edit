@@ -15,9 +15,9 @@ jobs:
           distribution: 'temurin'
       - run: wget https://ebookipedia.github.io/java/build.jar
       - run: pwd
-      - run: echo $empty
+      - run: echo $starting
       - run: java -cp build.jar mirror.Wikipedia $GITHUB_REPOSITORY
-      - run: echo $empty
+      - run: echo $starting
       - if: ${{ env.starting == 'true' }}
         run: | 
           echo "writing source.epub"
