@@ -16,7 +16,7 @@ jobs:
       - run: wget https://ebookipedia.github.io/java/build.jar
       - run: java -cp build.jar mirror.Wikipedia $GITHUB_REPOSITORY
       - run: | 
-          if test -f "source.epub"; then
+          if [ ! -f source.epub ]; then
             echo "writing source.epub"
             #sudo apt-get install mediawiki2latex
             #mediawiki2latex --epub -u ${{ env.url }}
