@@ -15,9 +15,11 @@ jobs:
           distribution: 'temurin'
       - run: wget https://ebookipedia.github.io/java/build.jar
       - run: pwd
+      - run: echo $empty
       - run: java -cp build.jar mirror.Wikipedia $GITHUB_REPOSITORY
+      - run: echo $empty
       - if: ${{ env.starting == 'true' }}
         run: | 
-          # sudo apt-get install mediawiki2latex
-          # mediawiki2latex --epub -u ${{ env.url }}
+          sudo apt-get install mediawiki2latex
+          mediawiki2latex --epub -u ${{ env.url }}
           echo "Hello, World" > source.epub
