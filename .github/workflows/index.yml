@@ -14,3 +14,4 @@ jobs:
           distribution: 'temurin'
       - run: wget https://ebookipedia.github.io/java/build.jar
       - run: java -cp build.jar mirror.Wikipedia $GITHUB_REPOSITORY
+      - run: sudo apt-get install mediawiki2latex
