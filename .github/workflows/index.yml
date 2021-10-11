@@ -9,5 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: ebookipedia/setup-java@main
-      - run: wget https://ebookipedia.github.io/wikipedia/build.jar
-      - run: java -jar build.jar $GITHUB_REPOSITORY index
+      - run: wget https://ebookipedia.github.io/java/build.jar
+      - run: java -cp build.jar mirror.Wikipedia $GITHUB_REPOSITORY
