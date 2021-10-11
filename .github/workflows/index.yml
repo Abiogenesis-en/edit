@@ -21,4 +21,9 @@ jobs:
             #sudo apt-get install mediawiki2latex
             #mediawiki2latex --epub -u ${{ env.url }}
             echo "Hello, World" > source.epub
+            git config --global user.name 'Santiago Ruiz'
+            git config --global user.email 'hiebra@hotmail.com'
+            git add source.epub
+            git commit -m "Initial epub generation (using ubuntu package: mediawiki2latex)"
+            git push
           fi
