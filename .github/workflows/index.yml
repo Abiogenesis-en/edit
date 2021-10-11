@@ -3,7 +3,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - index.html
+      - src/excerpt.html
 jobs:
   build:
     runs-on: ubuntu-latest
