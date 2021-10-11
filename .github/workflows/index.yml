@@ -18,7 +18,7 @@ jobs:
           java -cp build.jar mirror.Wikipedia $GITHUB_REPOSITORY
           echo $starting
           echo ${{ env.starting }}
-          if [ ! -f initial.epub ]; then
+          if [ ! -f source.epub ]; then
             #sudo apt-get install mediawiki2latex
             #mediawiki2latex --epub -u ${{ env.url }}
             echo "Hello, World" > src/source.epub
