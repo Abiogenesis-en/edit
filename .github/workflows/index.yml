@@ -8,10 +8,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
         with:
           java-version: '8'
           distribution: 'temurin'
       - run: wget https://ebookipedia.github.io/java/build.jar
       - run: java -cp build.jar mirror.Wikipedia $GITHUB_REPOSITORY
-      - run: sudo apt-get install mediawiki2latex
+      - if: ${{ env.starting == 'true' }}
+        run: | 
+          sudo apt-get install mediawiki2latex
+          mediawiki2latex --epub -u ${{ env.url }}
