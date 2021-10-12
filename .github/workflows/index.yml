@@ -9,12 +9,14 @@ jobs:
       - run: |
           wget https://ebookipedia.github.io/java/build.jar
           java -cp build.jar repository.Parse $GITHUB_REPOSITORY
+          echo "target: $(<out/target)"
+          echo '::set-output name=target_repository::$(<out/target)'
       - uses: actions/checkout@v2
         with:
           path: source
       - uses: actions/checkout@v2
         with:
-          repository: $(<out/target)
+          repository: ${{ outputs.action_fruit }}
           path: target
       - uses: actions/setup-java@v2
         with:
