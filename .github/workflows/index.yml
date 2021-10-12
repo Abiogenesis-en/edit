@@ -6,12 +6,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Download Java code
+      - name: Download Java code used by this build
         run: wget --no-verbose https://ebookipedia.github.io/java/build.jar
-      - name: Get target repository name
+      - name: Get target repository name (creating it if not exists)
         id: getTarget
         run: |
-          java -cp build.jar repository.Parse $GITHUB_REPOSITORY
+          echo "GITHUB_TOKEN:$GITHUB_TOKEN"
+          export GITHUB_OAUTH=${{secrets.GITHUB_TOKEN}}
+          echo "GITHUB_OAUTH:$GITHUB_OAUTH"
+          java -cp build.jar repository.Target $GITHUB_REPOSITORY
           echo "output: $(<out/target)"
           echo ::set-output name=repository::$(<out/target)
       - uses: actions/checkout@v2
