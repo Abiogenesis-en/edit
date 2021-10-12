@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           path: source
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@master
         with:
           name: $(<out/target)
           path: target
