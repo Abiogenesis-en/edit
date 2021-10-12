@@ -11,7 +11,7 @@ jobs:
       - name: Get target repository name (creating it if not exists)
         id: getTarget
         run: |
-          export GITHUB_OAUTH=${{secrets.GH_TOKEN}}
+          export GITHUB_OAUTH=${{secrets.GITHUB_TOKEN}}
           java -cp build.jar repository.Target $GITHUB_REPOSITORY
           echo "output: $(<out/target)"
           echo ::set-output name=repository::$(<out/target)
