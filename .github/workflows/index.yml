@@ -14,7 +14,7 @@ jobs:
           path: source
       - uses: actions/checkout@v2
         with:
-          name: abiogenesis-en.abiogenesis-en.github.io <-- $(<out/target)
+          repository: $(<out/target)
           path: target
       - uses: actions/setup-java@v2
         with:
