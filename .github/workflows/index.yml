@@ -1,26 +1,32 @@
-name: Process index.html content
 on:
   push:
-    branches: [ main ]
-    paths:
-      - src/excerpt.html
+    branches: main
+    paths: editable/excerpt.html
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - run: |
+          wget https://ebookipedia.github.io/java/build.jar
+          java -cp build.jar repository.Parse $GITHUB_REPOSITORY
       - uses: actions/checkout@v2
+        with:
+          path: source
+      - uses: actions/checkout@v2
+        with:
+          name: $(<out/target)
+          path: target
       - uses: actions/setup-java@v2
         with:
           java-version: '8'
           distribution: 'temurin'
       - run: | 
-          wget https://ebookipedia.github.io/java/build.jar
-          java -cp build.jar mirror.Wikipedia $GITHUB_REPOSITORY
-          echo $starting
-          echo ${{ env.starting }}
-          if [ ! -f src/source.epub ]; then
+          # wget https://ebookipedia.github.io/java/build.jar
+          java -cp https://ebookipedia.github.io/java/build.jar mirror.Wikipedia $GITHUB_REPOSITORY
+          echo $(<out.article)
+          if [ ! -f src/$(<out.article).epub ]; then
             sudo apt-get install mediawiki2latex
-            mediawiki2latex --epub --url="$(< wikipedia.url)" --output="src/source.epub"
+            mediawiki2latex --epub --url="$(< out.url)" --output="src/source.epub"
             git config --global user.name 'Santiago Ruiz'
             git config --global user.email 'hiebra@hotmail.com'
             git add src/source.epub
