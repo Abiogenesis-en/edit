@@ -1,4 +1,4 @@
-name: Mirror Wikipedia article
+name: Build
 on:
   push:
     branches: main
