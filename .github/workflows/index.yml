@@ -6,7 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - name: x
+        run: |
           wget https://ebookipedia.github.io/java/build.jar
           java -cp build.jar repository.Parse $GITHUB_REPOSITORY
           echo "target: $(<out/target)"
@@ -16,7 +17,7 @@ jobs:
           path: source
       - uses: actions/checkout@v2
         with:
-          repository: ${{ outputs.action_fruit }}
+          repository: ${{ steps.x.outputs.action_fruit }}
           path: target
       - uses: actions/setup-java@v2
         with:
