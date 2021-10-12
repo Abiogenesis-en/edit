@@ -1,4 +1,4 @@
-![Build](../../actions/workflows/index2.yml/badge.svg)
+![Build](../../actions/workflows/index.yml/badge.svg)
 
 This repository allows you to [create](), [modify]() and [publish]() an [eBook-friendly]() mirror of the Wikipedia article identified by
 * The `lang` attribute of the `<html>` tag at the beginning of [this file](../../tree/main/editable/excerpt.html) (the [excerpt](https://ebookipedia.github.io/excerpt)) that must match the [language code](https://ebookipedia.github.io/lang) of the mirrored article
