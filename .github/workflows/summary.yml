@@ -32,7 +32,7 @@ jobs:
         id: II
         uses: andstor/file-existence-action@v1
         with:
-          files: "docs/${{steps.I.outputs.title}}.epub"
+          files: "docs/ebook.epub"
       - if: steps.II.outputs.files_exists == 'false'
         name: Getting the epub file
         uses: ebookipedia/epub@main
