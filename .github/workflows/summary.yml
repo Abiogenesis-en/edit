@@ -2,7 +2,7 @@ name: Summary
 on:
   push:
     branches: main
-    paths: editable/excerpt.html
+    paths: editable/summary.html
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,16 +17,16 @@ jobs:
           git config --global user.email "${USER_NAME}@users.noreply.github.com"
         env:
           USER_NAME: ${{github.actor}}
-      - name: Building docs/excerpt.html (from editable/excerpt.html) and detecting the URL and title of the mirrored article
+      - name: Building docs/summary.html (from editable/summary.html) and detecting the URL and title of the mirrored article
         id: I
         run: |
           export GITHUB_OAUTH=${{secrets.GITHUB_TOKEN}}
           java -cp build.jar updated.Excerpt $GITHUB_REPOSITORY
           echo ::set-output name=title::$(<.java-generated/title)
           echo ::set-output name=url::$(<.java-generated/url)
-      - name: Commiting docs/excerpt.html
+      - name: Commiting docs/summary.html
         run: |
-          git add docs/excerpt.html
+          git add docs/summary.html
           git commit -m "Derived from editable/excerpt.html (ebookinet)"
       - name: Generating the epub version of the mirrored article if not generated yet
         id: II
