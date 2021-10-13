@@ -7,14 +7,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Downloading Java code used by this build
-        run: |
-          wget --no-verbose https://ebookipedia.github.io/java/build.jar
-          ls
-      - run: ls
       - name: Checking out the files in this repository
         uses: actions/checkout@v1
-      - run: ls
+      - name: Downloading Java code used by this build
+        run: wget --no-verbose https://ebookipedia.github.io/java/build.jar
       - name: Configuring user/email to be used for git commits
         run: |
           git config --global user.name "${USER_NAME}"
@@ -27,7 +23,7 @@ jobs:
           ls
           java -cp build.jar updated.Excerpt
           git add docs/excerpt.html
-          git commit -m "(automated) adapt edited excerpt.html to be published"
+          git commit -m "(automated) adapted from modified editable/excerpt.html"
           git push
       - name: Generating the epub of the mirrored article (using mediawiki2latex) if it was not generated yet
         run: |
