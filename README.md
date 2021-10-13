@@ -3,7 +3,7 @@
 [![.github/workflows/atomic.yml](../../actions/workflows/atomic.yml/badge.svg)](../../actions/workflows/atomic.yml)
 
 This repository allows you to [create](), [modify]() and [publish]() an [eBook-friendly]() mirror of a Wikipedia article. You will need to
-* Set the [language code](https://ebookipedia.github.io/lang) of the mirrored article as the `<html lang` of [the summary](../../tree/main/editable/summary.html)
+* Set the [language code](https://ebookipedia.github.io/lang) of the article as the [lang]() of [the summary](../../tree/main/editable/summary.html)
 * The text content of the `<title>` tag of the same [file](../../edit/main/editable/summary.html), that must match the title of the mirrored article
 
 This values, [once stablished](), must not be changed
