@@ -1,14 +1,18 @@
-name: Summary
+name: Build editable/summary.html
 on:
   push:
     branches: main
     paths: editable/summary.html
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  name: Preparing the environament
+  initialize:
     steps:
       - name: Checking out the files in this repository
         uses: actions/checkout@v2
+  name: Transform editable/summary.html in the publishable docs/summary.html storing the title and the URL
+  transform:
+    runs-on: ubuntu-latest
+    steps:
       - name: Downloading Java code used by this build
         run: wget --no-verbose https://ebookipedia.github.io/java/build.jar
       - name: Configuring user/email to be used for git commits
@@ -33,7 +37,10 @@ jobs:
         uses: andstor/file-existence-action@v1
         with:
           files: "docs/${{steps.I.outputs.title}}.epub"
-      - if: steps.II.outputs.files_exists == 'false'
+  if: steps.II.outputs.files_exists == 'false'
+  ebook:
+    runs-on: ubuntu-latest
+    steps:
         uses: ebookipedia/epub@main
         with:
           title: ${{steps.I.outputs.title}}
