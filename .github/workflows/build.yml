@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checking out the files in this repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Downloading Java code used by this build
         run: wget --no-verbose https://ebookipedia.github.io/java/build.jar
       - name: Configuring user/email to be used for git commits
