@@ -18,20 +18,24 @@ jobs:
         env:
           USER_NAME: ${{github.actor}}
       - name: Building docs/excerpt.html from editable/excerpt.html and detecting the mirrored article
+        id: I
         run: |
           export GITHUB_OAUTH=${{secrets.GITHUB_TOKEN}}
           java -cp build.jar updated.Excerpt $GITHUB_REPOSITORY
+          echo ::set-output name=title::$(<.java-generated/title)
+          echo ::set-output name=title::$(<.java-generated/url)
           git add docs/excerpt.html
           git commit -m "(automated) adapted from modified editable/excerpt.html"
-      - name: Generating the epub2 version of the mirrored article (using mediawiki2latex) if not generated yet
-        id: checking
+      - name: Generating the epub version of the mirrored article if not generated yet
+        id: II
         uses: andstor/file-existence-action@v1
         with:
-          files: "*.epub"
-      - if: steps.checking.outputs.files_exists == 'false'
+          files: "build.jar"
+      - if: steps.II.outputs.files_exists == 'false'
         uses: ebookipedia/epub@main
         with:
-          title: "x"
-          url: "y"
+          title: ${{steps.I.outputs.title}}
+          url: ${{steps.I.outputs.url}}
+      - run: ls
       - name: Pushing changes
         run: git push
