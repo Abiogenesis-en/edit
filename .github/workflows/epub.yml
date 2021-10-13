@@ -1,4 +1,4 @@
-name: eBook
+name: epub
 on:
   push:
     branches: main
