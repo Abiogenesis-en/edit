@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ncx PUBLIC '-//NISO//DTD ncx 2005-1//EN' 'http://www.daisy.org/z3986/2005/ncx-2005-1.dtd'>
+<ncx xmlns='http://www.daisy.org/z3986/2005/ncx/'>
+<head>
+  <meta name='dtb:uid' content='uYKPcU0Zg'/>
+  <meta name='dtb:depth' content='1'/>
+  <meta name='dtb:totalPageCount' content='0'/>
+  <meta name='dtb:maxPageNumber' content='0'/>
+</head>
+<docTitle><text>Fesenkov Astrophysical Institute</text></docTitle>
+<docAuthor><text>EpubPress</text></docAuthor>
+<navMap>
+  <navPoint id='cover' playOrder='1'>
+    <navLabel><text>Cover</text></navLabel>
+    <content src='cover.xhtml'/>
+  </navPoint>
+  <navPoint class='toc' id='toc' playOrder='2'>
+    <navLabel><text></text></navLabel>
+    <content src='content/toc.xhtml'/>
+  </navPoint>
+  <navPoint class='section' id='s1' playOrder='3'>
+    <navLabel><text>Fesenkov Astrophysical Institute</text></navLabel>
+    <content src='content/s1.xhtml'/>
+  </navPoint>
+  <navPoint class='section' id='s2' playOrder='4'>
+    <navLabel><text>References</text></navLabel>
+    <content src='content/s2.xhtml'/>
+  </navPoint>
+</navMap>
+</ncx>
