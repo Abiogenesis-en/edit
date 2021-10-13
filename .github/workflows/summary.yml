@@ -53,7 +53,7 @@ jobs:
           mkdir -p docs/epub
           unzip docs/ebook.epub -d docs/epub
       - if: steps.II.outputs.files_exists == 'false'
-      - name: Commiting and pushing docs/epub directory contents
+        name: Commiting and pushing docs/epub directory contents
         run: |
           git add docs/epub/*
           git commit -m "Derived from an update of the epub file"
