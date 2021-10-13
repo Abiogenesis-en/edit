@@ -27,7 +27,7 @@ jobs:
       - name: Commiting docs/summary.html
         run: |
           git add docs/summary.html
-          git commit -m "Derived from an update of editable/excerpt.html"
+          git commit -m "Derived from an update of editable/summary.html"
       - name: Checking for the existence of an epub file with the mirrored content
         id: II
         uses: andstor/file-existence-action@v1
