@@ -42,9 +42,9 @@ jobs:
       - if: steps.II.outputs.files_exists == 'false'
         name: Moving the downloaded epub to /docs and committing it
         run: |
-          mv "$EBOOK_TITLE" docs
-          git add "docs/$EBOOK_TITLE"
-          git commit -m "Derived from ${{steps.I.outputs.url}} (ebookinet/epub-press)"
+          mv "$EBOOK_TITLE" docs/ebook.epub
+          git add "docs/ebook.epub"
+          git commit -m "Derived from ${{steps.I.outputs.url}}"
         env:
           EBOOK_TITLE: "${{steps.I.outputs.title}}.epub"
       - name: Pushing the committed contents
