@@ -2,7 +2,7 @@ name: epub
 on:
   push:
     branches: main
-    paths: editable/*.epub
+    paths: docs/ebook.epub
 jobs:
   build:
     runs-on: ubuntu-latest
