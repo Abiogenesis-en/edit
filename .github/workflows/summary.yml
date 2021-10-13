@@ -4,8 +4,7 @@ on:
     branches: main
     paths: editable/summary.html
 jobs:
-  initialize:
-    name: Preparing the environment
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Configuring user/email for (local) git commits
@@ -18,50 +17,35 @@ jobs:
         uses: actions/checkout@v2
       - name: Downloading the needed Java code
         run: wget --no-verbose https://ebookipedia.github.io/java/build.jar
-  html:
-    name: Generating the (publishable) docs/summary.html from the contents of the (updated) editable/summary.html and storing the title and URL of the mirrored content
-    needs: initialize
-    runs-on: ubuntu-latest
-    steps:
-      - name: Running the Java code
+      - name: Generating the docs/summary.html from editable/summary.html and storing title and URL of the mirrored content
+        id: I
         run: |
           export GITHUB_OAUTH=${{secrets.GITHUB_TOKEN}} # this system settting is not used yet
           java -cp build.jar updated.Summary $GITHUB_REPOSITORY # this parameter is not used yet
-      - name: Saving the title and the URL of the mirrored document
-        id: I
           echo ::set-output name=title::$(<.java-generated/title)
           echo ::set-output name=url::$(<.java-generated/url)
-      - name: Commiting
+      - name: Commiting docs/summary.html
         run: |
           git add docs/summary.html
           git commit -m "Derived from an update of editable/excerpt.html"
-      - name: Checking if exists locally an ebook (epub) with the mirrored content
+      - name: Checking for the existence of an epub file with the mirrored content
         id: II
         uses: andstor/file-existence-action@v1
         with:
           files: "docs/${{steps.I.outputs.title}}.epub"
-  ebook:
-    if: steps.II.outputs.files_exists == 'false'
-    name: Generating the epub version of the mirrored article if not generated yet
-    needs: [initialize, html]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Getting the epub file
+      - if: steps.II.outputs.files_exists == 'false'
+        name: Getting the epub file
         uses: ebookipedia/epub@main
         with:
           title: ${{steps.I.outputs.title}}
           url: ${{steps.I.outputs.url}}
-      - name: Moving the downloaded epub to /docs and committing
+      - if: steps.II.outputs.files_exists == 'false'
+        name: Moving the downloaded epub to /docs and committing it
         run: |
           mv "$EBOOK_TITLE" docs
           git add "docs/$EBOOK_TITLE"
           git commit -m "Derived from ${{steps.I.outputs.url}} (ebookinet/epub-press)"
         env:
           EBOOK_TITLE: "${{steps.I.outputs.title}}.epub"
-  push:
-    name: Push
-    needs: [html, ebook]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Pushing
+      - name: Pushing all committed contents
         run: git push
