@@ -30,7 +30,7 @@ jobs:
         id: II
         uses: andstor/file-existence-action@v1
         with:
-          files: "generated.epub"
+          files: "${{steps.I.outputs.title}}.epub"
       - if: steps.II.outputs.files_exists == 'false'
         uses: ebookipedia/epub@main
         with:
