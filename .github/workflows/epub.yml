@@ -20,7 +20,7 @@ jobs:
           if test -f docs/ebook.epub; then
             mkdir -p docs/epub
             unzip docs/ebook.epub -d docs/epub
-          else 
+          else
             rm -R docs/epub
           fi
       - name: Commiting and pushing docs/epub directory contents
