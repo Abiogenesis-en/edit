@@ -1,4 +1,4 @@
-[![.github/workflows/summary.yml](.github/workflows/summary.yml/badge.svg)](https://github.com/ebookipedia/ebook/actions/workflows/summary.yml)
+[![.github/workflows/summary.yml](../actions/workflows/summary.yml/badge.svg)](https://github.com/ebookipedia/ebook/actions/workflows/summary.yml)
 [![.github/workflows/epub.yml](https://github.com/ebookipedia/ebook/actions/workflows/epub.yml/badge.svg)](https://github.com/ebookipedia/ebook/actions/workflows/epub.yml)
 [![.github/workflows/atomic.yml](https://github.com/ebookipedia/ebook/actions/workflows/atomic.yml/badge.svg)](https://github.com/ebookipedia/ebook/actions/workflows/atomic.yml)
 
