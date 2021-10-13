@@ -18,7 +18,7 @@ jobs:
       - name: Generating the docs/epub directory from the contents of the epub file
         run: |
           mkdir -p docs/epub
-          unzip docs/*.zip -d docs/epub
+          unzip docs/ebook.epub -d docs/epub
       - name: Commiting and pushing docs/epub directory contents
         run: |
           git add docs/epub/*
