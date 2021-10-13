@@ -2,8 +2,8 @@
 [![.github/workflows/epub.yml](../../actions/workflows/epub.yml/badge.svg)](../../actions/workflows/epub.yml)
 [![.github/workflows/atomic.yml](../../actions/workflows/atomic.yml/badge.svg)](../../actions/workflows/atomic.yml)
 
-This repository allows you to [create](), [modify]() and [publish]() an [eBook-friendly]() mirror of a Wikipedia article. You only need to set
-* The `lang` attribute of the `<html>` tag of [this file](../../tree/main/editable/excerpt.html) (the [summary](https://ebookipedia.github.io/summary)) that must match the [language code](https://ebookipedia.github.io/lang) of the mirrored article
+This repository allows you to [create](), [modify]() and [publish]() an [eBook-friendly]() mirror of a Wikipedia article. You will need to
+* Set the [language code](https://ebookipedia.github.io/lang) of the mirrored article as the `lang` attribute of the `<html>` tag of [the summary](../../tree/main/editable/summary.html)
 * The text content of the `<title>` tag of the same [file](../../edit/main/editable/summary.html), that must match the title of the mirrored article
 
 This values, [once stablished](), must not be changed
