@@ -47,5 +47,5 @@ jobs:
           git commit -m "Derived from ${{steps.I.outputs.url}} (ebookinet/epub-press)"
         env:
           EBOOK_TITLE: "${{steps.I.outputs.title}}.epub"
-      - name: Pushing all committed contents
+      - name: Pushing the committed contents
         run: git push
