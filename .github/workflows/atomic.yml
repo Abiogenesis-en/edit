@@ -2,7 +2,7 @@ name: atomic
 on:
   push:
     branches: main
-    paths: docs/epub/*
+    paths: docs/epub/**
 jobs:
   build:
     runs-on: ubuntu-latest
