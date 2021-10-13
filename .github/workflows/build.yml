@@ -1,4 +1,4 @@
-name: Build and, if configured, publish
+name: Build and publish
 on:
   push:
     branches: main
