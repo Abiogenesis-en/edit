@@ -23,7 +23,7 @@ jobs:
           export GITHUB_OAUTH=${{secrets.GITHUB_TOKEN}}
           java -cp build.jar updated.Excerpt $GITHUB_REPOSITORY
           echo ::set-output name=title::$(<.java-generated/title)
-          echo ::set-output name=title::$(<.java-generated/url)
+          echo ::set-output name=url::$(<.java-generated/url)
           git add docs/excerpt.html
           git commit -m "(automated) adapted from modified editable/excerpt.html"
       - name: Generating the epub version of the mirrored article if not generated yet
