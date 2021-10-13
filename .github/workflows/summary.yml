@@ -4,43 +4,49 @@ on:
     branches: main
     paths: editable/summary.html
 jobs:
-  name: Preparing the environament
   initialize:
-    steps:
-      - name: Checking out the files in this repository
-        uses: actions/checkout@v2
-  name: Transform editable/summary.html in the publishable docs/summary.html storing the title and the URL
-  transform:
+    name: Preparing the environment
     runs-on: ubuntu-latest
     steps:
-      - name: Downloading Java code used by this build
-        run: wget --no-verbose https://ebookipedia.github.io/java/build.jar
-      - name: Configuring user/email to be used for git commits
+      - name: Configuring user/email for (local) git commits
         run: |
           git config --global user.name "${USER_NAME}"
           git config --global user.email "${USER_NAME}@users.noreply.github.com"
         env:
           USER_NAME: ${{github.actor}}
-      - name: Building docs/summary.html (from editable/summary.html) and detecting the URL and title of the mirrored article
-        id: I
+      - name: Checking out
+        uses: actions/checkout@v2
+      - name: Downloading the needed Java code
+        run: wget --no-verbose https://ebookipedia.github.io/java/build.jar
+  html:
+    name: Generating the (publishable) docs/summary.html from the contents of the (updated) editable/summary.html and storing the title and URL of the mirrored content
+    needs: initialize
+    runs-on: ubuntu-latest
+    steps:
+      - name: Running the Java code
         run: |
-          export GITHUB_OAUTH=${{secrets.GITHUB_TOKEN}}
-          java -cp build.jar updated.Excerpt $GITHUB_REPOSITORY
+          export GITHUB_OAUTH=${{secrets.GITHUB_TOKEN}} # this system settting is not used yet
+          java -cp build.jar updated.Summary $GITHUB_REPOSITORY # this parameter is not used yet
+      - name: Saving the title and the URL of the mirrored document
+        id: I
           echo ::set-output name=title::$(<.java-generated/title)
           echo ::set-output name=url::$(<.java-generated/url)
-      - name: Commiting docs/summary.html
+      - name: Commiting
         run: |
           git add docs/summary.html
-          git commit -m "Derived from editable/excerpt.html (ebookinet)"
-      - name: Generating the epub version of the mirrored article if not generated yet
+          git commit -m "Derived from an update of editable/excerpt.html"
+      - name: Checking if exists locally an ebook (epub) with the mirrored content
         id: II
         uses: andstor/file-existence-action@v1
         with:
           files: "docs/${{steps.I.outputs.title}}.epub"
-  if: steps.II.outputs.files_exists == 'false'
   ebook:
+    if: steps.II.outputs.files_exists == 'false'
+    name: Generating the epub version of the mirrored article if not generated yet
+    needs: [initialize, html]
     runs-on: ubuntu-latest
     steps:
+      - name: Getting the epub file
         uses: ebookipedia/epub@main
         with:
           title: ${{steps.I.outputs.title}}
@@ -52,5 +58,10 @@ jobs:
           git commit -m "Derived from ${{steps.I.outputs.url}} (ebookinet/epub-press)"
         env:
           EBOOK_TITLE: "${{steps.I.outputs.title}}.epub"
-      - name: Pushing changes
+  push:
+    name: Push
+    needs: [html, ebook]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pushing
         run: git push
