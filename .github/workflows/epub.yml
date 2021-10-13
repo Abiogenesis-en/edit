@@ -1,4 +1,4 @@
-name: Summary
+name: eBook
 on:
   push:
     branches: main
