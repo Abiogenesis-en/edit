@@ -25,6 +25,7 @@ jobs:
           git commit -m "(automated) adapt edited excerpt.html to be published"
           git push
       - name: Generating the epub of the mirrored article (using mediawiki2latex) if it was not generated yet
+        run: |
           if [ ! -f docs/article.epub2 ]; then
             sudo apt-get install mediawiki2latex
             mediawiki2latex --epub --url="$(<.java-generated/mirrored-article)" --output="docs/article.epub2"
